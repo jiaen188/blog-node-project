@@ -34,8 +34,16 @@ const newBlog = (blogData = {}) => {
   }
 }
 
+const upateBlog = (id, blogData = {}) => {
+  // id 就是要更新博客的 id
+  // blogData 是一个博客对象， 包含 title content 属性
+  console.log('update blog', id, blogData)
+  return true
+}
+
 module.exports = {
   getList,
   getDetail,
-  newBlog
+  newBlog,
+  upateBlog
 }
