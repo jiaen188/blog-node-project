@@ -19,7 +19,6 @@ con.query(sql, (err, result) => {
     console.error(err)
     return
   }
-  console.log(result)
 })
 
 // 关闭连接
