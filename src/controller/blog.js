@@ -1,3 +1,4 @@
+const xss = require('xss')
 const { exec } = require('../db/mysql')
 
 const getList = (author, keyword) => {
@@ -27,7 +28,7 @@ const newBlog = (blogData = {}) => {
   // blogData 是一个博客对象， 包含 title content 属性
   const sql = `
     insert into blogs (title, content, createtime, author)
-    values ('${title}', '${content}', '${createtime}', '${author}');
+    values ('${xss(title)}', '${xss(content)}', '${createtime}', '${author}');
   `
   return exec(sql).then(insertData => {
     return {
@@ -41,7 +42,7 @@ const upateBlog = (id, blogData = {}) => {
   // blogData 是一个博客对象， 包含 title content 属性
   const { title, content } = blogData
   const sql = `
-    update blogs set title='${title}', content='${content}' where id=${id}
+    update blogs set title='${xss(title)}', content='${xss(content)}' where id=${id}
   `
   return exec(sql).then(updateData => {
     if (updateData.affectedRows > 0) {
